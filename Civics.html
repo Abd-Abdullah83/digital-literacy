@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiSmart Lahore — Digital Literacy & Online Awareness</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--green:#1a7a4a;--gl:#25a866;--gd:#0f4d2e;--white:#f8faf9;--amber:#e8a020;--al:#ffc94d;--navy:#0d1f2d;--nm:#17324a;--gray:#e4ece8;--text:#1c2b24;--muted:#5a7063;--red:#c0392b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',Georgia,sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(37,168,102,.5)}70%{box-shadow:0 0 0 16px rgba(37,168,102,0)}}
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px rgba(232,160,32,.5))}50%{filter:drop-shadow(0 0 20px rgba(232,160,32,.9))}}
+@keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(80px,-70px) scale(1.2)}70%{transform:translate(-50px,80px) scale(.9)}}
+@keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-70px,60px) scale(.8)}70%{transform:translate(60px,-80px) scale(1.15)}}
+@keyframes countUp{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes borderGlow{0%,100%{border-color:rgba(37,168,102,.4)}50%{border-color:rgba(255,201,77,.7)}}
+
+/* SCROLL REVEAL — elements are VISIBLE by default, animation only applied when .js-ready is on body */
+.anim{transition:opacity .65s ease,transform .65s ease;}
+body.js-ready .anim{opacity:0;}
+body.js-ready .anim.up{transform:translateY(48px);}
+body.js-ready .anim.left{transform:translateX(-56px);}
+body.js-ready .anim.right{transform:translateX(56px);}
+body.js-ready .anim.scale{transform:scale(.85);}
+.anim.show,.anim{opacity:1;transform:none;}
+body.js-ready .anim.show{opacity:1!important;transform:none!important;}
+.d1{transition-delay:.05s}.d2{transition-delay:.15s}.d3{transition-delay:.25s}
+.d4{transition-delay:.35s}.d5{transition-delay:.45s}.d6{transition-delay:.55s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,31,45,.97);backdrop-filter:blur(16px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:2px solid var(--green);animation:fadeDown .6s ease both;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;background:linear-gradient(90deg,var(--amber),var(--al),var(--amber));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradMove 3s ease infinite;letter-spacing:.5px;}
+.nav-links{display:flex;gap:1.4rem;list-style:none;}
+.nav-links a{color:#b0cdc0;font-size:.78rem;text-decoration:none;letter-spacing:1.2px;text-transform:uppercase;font-weight:500;transition:all .2s;position:relative;padding-bottom:3px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:var(--al);transform:scaleX(0);transition:transform .2s;transform-origin:left;}
+.nav-links a:hover{color:#fff;}.nav-links a:hover::after{transform:scaleX(1);}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--amber);margin:5px 0;transition:.3s;}
+
+/* HERO */
+#hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 5% 60px;overflow:hidden;background:#0d1f2d;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
+.orb1{width:550px;height:550px;background:radial-gradient(circle,rgba(26,122,74,.32),transparent);top:-15%;left:-10%;animation:orb1 14s ease-in-out infinite;}
+.orb2{width:450px;height:450px;background:radial-gradient(circle,rgba(232,160,32,.18),transparent);bottom:-10%;right:-8%;animation:orb2 17s ease-in-out infinite;}
+.orb3{width:320px;height:320px;background:radial-gradient(circle,rgba(37,168,102,.18),transparent);top:45%;left:55%;animation:orb1 20s ease-in-out infinite reverse;}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(37,168,102,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,168,102,.04) 1px,transparent 1px);background-size:52px 52px;z-index:0;}
+.hero-content{position:relative;z-index:1;max-width:880px;}
+.hero-badge{display:inline-block;background:rgba(26,122,74,.22);border:1px solid rgba(37,168,102,.55);color:var(--gl);font-size:.76rem;letter-spacing:3px;text-transform:uppercase;padding:7px 20px;border-radius:30px;margin-bottom:26px;animation:fadeDown .8s .3s ease both,borderGlow 3s ease infinite;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.4rem);color:#fff;line-height:1.1;margin-bottom:22px;animation:fadeUp 1s .4s ease both;}
+.hero-title em{color:transparent;background:linear-gradient(135deg,var(--amber),var(--al),#ff9f00);-webkit-background-clip:text;background-clip:text;font-style:normal;animation:glow 3s ease infinite;}
+.hero-sub{font-size:1.06rem;color:#9abcac;max-width:580px;margin:0 auto 16px;line-height:1.75;font-weight:300;animation:fadeUp 1s .55s ease both;}
+.hero-urdu{font-size:1.45rem;color:var(--al);margin-bottom:36px;animation:fadeUp 1s .65s ease both;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s .75s ease both;}
+.btn-primary{background:linear-gradient(135deg,var(--green),var(--gl));color:#fff;padding:14px 30px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .3s;box-shadow:0 4px 22px rgba(26,122,74,.4);display:inline-block;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(26,122,74,.65);}
+.btn-secondary{background:transparent;color:var(--amber);padding:14px 30px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem;border:2px solid var(--amber);transition:all .3s;display:inline-block;}
+.btn-secondary:hover{background:var(--amber);color:var(--navy);transform:translateY(-3px);}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:60px;flex-wrap:wrap;animation:fadeUp 1s .85s ease both;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;background:linear-gradient(135deg,var(--amber),var(--al));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:.7rem;color:#607870;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:1;text-align:center;animation:bounce 2.2s ease infinite;}
+.scroll-hint::before{content:'SCROLL';font-size:.58rem;letter-spacing:3px;color:#506860;display:block;margin-bottom:6px;}
+.scroll-hint span{display:block;width:2px;height:38px;background:linear-gradient(to bottom,transparent,var(--gl));margin:0 auto;}
+
+/* SECTION BASE */
+section{padding:88px 5%;}
+.container{max-width:1140px;margin:0 auto;}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:12px;}
+.section-label::before{content:'';display:block;width:18px;height:2px;background:currentColor;flex-shrink:0;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);color:var(--navy);line-height:1.2;margin-bottom:16px;}
+.section-title em{color:var(--green);font-style:normal;position:relative;display:inline-block;}
+.section-title em::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gl));border-radius:2px;}
+.section-desc{color:var(--muted);font-size:1.01rem;max-width:640px;line-height:1.8;}
+
+/* ABOUT */
+#about{background:#fff;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:48px;}
+.about-visual{background:linear-gradient(145deg,var(--navy),var(--nm));border-radius:20px;padding:36px;position:relative;overflow:hidden;border:1px solid rgba(37,168,102,.22);box-shadow:0 24px 60px rgba(0,0,0,.18);}
+.about-visual::after{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(37,168,102,.22),transparent);border-radius:50%;}
+.circles-row{display:flex;gap:20px;justify-content:center;margin-bottom:22px;}
+.stat-circle{display:flex;flex-direction:column;align-items:center;justify-content:center;width:110px;height:110px;border-radius:50%;border:3px solid;transition:transform .3s;}
+.stat-circle:hover{transform:scale(1.1);}
+.stat-circle.green{border-color:var(--gl);animation:pulse 2.8s ease infinite;}
+.stat-circle.amber{border-color:var(--amber);animation:pulse 2.8s .9s ease infinite;}
+.sc-num{font-family:'Playfair Display',serif;font-size:1.55rem;color:#fff;font-weight:900;}
+.sc-label{font-size:.6rem;color:#7aa090;text-align:center;letter-spacing:.5px;text-transform:uppercase;padding:0 5px;}
+.about-fact{background:rgba(37,168,102,.08);border-left:3px solid var(--gl);padding:11px 15px;border-radius:0 8px 8px 0;margin-bottom:10px;transition:all .3s;cursor:default;}
+.about-fact:hover{background:rgba(37,168,102,.18);transform:translateX(5px);}
+.about-fact p{color:#b8d0c8;font-size:.84rem;line-height:1.5;}
+.about-text h3{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);margin-bottom:14px;}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:12px;font-size:.97rem;}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.tag{background:rgba(26,122,74,.08);color:var(--gd);font-size:.76rem;padding:6px 14px;border-radius:20px;font-weight:500;border:1px solid rgba(26,122,74,.18);transition:all .25s;cursor:default;}
+.tag:hover{background:var(--green);color:#fff;transform:translateY(-2px);}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px;margin-top:48px;}
+.card{background:#fff;border-radius:14px;padding:28px;border:1px solid #d8e8de;transition:all .32s;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--card-accent,var(--green));transition:height .3s;}
+.card:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:var(--gl);}
+.card:hover::before{height:6px;}
+.card-icon{font-size:2.3rem;margin-bottom:14px;display:block;animation:float 4s ease-in-out infinite;}
+.card:nth-child(2) .card-icon{animation-delay:.6s}.card:nth-child(3) .card-icon{animation-delay:1.2s}.card:nth-child(4) .card-icon{animation-delay:1.8s}
+.card h3{font-size:1.06rem;font-weight:600;color:var(--navy);margin-bottom:10px;}
+.card p{color:var(--muted);font-size:.89rem;line-height:1.7;}
+
+/* ETHICS */
+#ethics{background:linear-gradient(180deg,#eff7f1 0%,#fff 100%);}
+.ethics-list{margin-top:46px;display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+.ethics-item{display:flex;gap:14px;align-items:flex-start;background:#fff;padding:18px;border-radius:12px;border:1px solid #daeade;transition:all .3s;}
+.ethics-item:hover{border-color:var(--gl);box-shadow:0 8px 24px rgba(26,122,74,.1);transform:translateY(-3px);}
+.ethics-num{flex-shrink:0;width:33px;height:33px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--gl));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;box-shadow:0 4px 12px rgba(26,122,74,.3);}
+.ethics-item h4{font-size:.94rem;font-weight:600;color:var(--navy);margin-bottom:5px;}
+.ethics-item p{font-size:.84rem;color:var(--muted);line-height:1.6;}
+.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px;}
+.do-col{background:linear-gradient(135deg,#e8f7ee,#d4f0e0);border:2px solid #a8d9b8;border-radius:14px;padding:26px;}
+.dont-col{background:linear-gradient(135deg,#fdf0ee,#fae0dc);border:2px solid #f0b8b0;border-radius:14px;padding:26px;}
+.do-col h3{color:var(--gd);font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.dont-col h3{color:var(--red);font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.do-list,.dont-list{list-style:none;}
+.do-list li,.dont-list li{padding:8px 0;font-size:.88rem;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;gap:10px;color:var(--text);line-height:1.5;}
+.do-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+.dont-list li::before{content:'✗';color:var(--red);font-weight:700;flex-shrink:0;}
+
+/* FAKE NEWS */
+#fakenews{background:var(--navy);position:relative;overflow:hidden;}
+#fakenews::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(26,122,74,.14),transparent);border-radius:50%;}
+#fakenews .section-label{color:var(--amber);}
+#fakenews .section-label::before{background:var(--amber);}
+#fakenews .section-title{color:#fff;}
+#fakenews .section-title em{color:var(--amber);}
+#fakenews .section-title em::after{background:linear-gradient(90deg,var(--amber),var(--al));}
+#fakenews .section-desc{color:#8aaa98;}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-top:46px;}
+.step-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:26px;text-align:center;transition:all .32s;cursor:default;position:relative;overflow:hidden;}
+.step-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,168,102,.14),transparent);opacity:0;transition:opacity .3s;}
+.step-card:hover{border-color:var(--gl);transform:translateY(-6px) scale(1.02);box-shadow:0 18px 44px rgba(0,0,0,.28);}.step-card:hover::before{opacity:1;}
+.step-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;display:block;margin-bottom:10px;background:linear-gradient(135deg,var(--amber),var(--al));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.step-card h4{color:#fff;font-size:.98rem;margin-bottom:8px;}
+.step-card p{color:#8aaa98;font-size:.84rem;line-height:1.6;}
+.red-flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:12px;margin-top:28px;}
+.red-flag{background:rgba(192,57,43,.11);border:1px solid rgba(192,57,43,.28);border-radius:10px;padding:15px 18px;display:flex;gap:12px;align-items:flex-start;transition:all .28s;}
+.red-flag:hover{background:rgba(192,57,43,.2);transform:translateX(4px);}
+.rf-icon{font-size:1.25rem;flex-shrink:0;}
+.red-flag p{color:#f0a8a0;font-size:.86rem;line-height:1.6;}.red-flag strong{color:#fff;}
+.fact-checkers{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;margin-top:28px;}
+.fc-card{background:rgba(37,168,102,.1);border:1px solid rgba(37,168,102,.22);border-radius:10px;padding:16px;transition:all .3s;}
+.fc-card:hover{background:rgba(37,168,102,.2);transform:translateY(-4px);}
+.fc-name{color:var(--al);font-weight:600;font-size:.95rem;margin-bottom:4px;}
+.fc-desc{color:#8aaa98;font-size:.83rem;line-height:1.5;}
+
+/* CYBERBULLYING */
+#cyberbullying{background:#fff;}
+.cyber-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:46px;}
+.cyber-types{display:flex;flex-direction:column;gap:11px;}
+.cyber-type{background:linear-gradient(135deg,#fdf0ee,#fff8f7);border-left:4px solid var(--red);padding:15px 18px;border-radius:0 10px 10px 0;transition:all .3s;}
+.cyber-type:hover{transform:translateX(6px);box-shadow:3px 0 14px rgba(192,57,43,.14);}
+.cyber-type h4{color:var(--red);font-size:.91rem;margin-bottom:4px;}
+.cyber-type p{color:var(--muted);font-size:.84rem;line-height:1.5;}
+.help-box{background:linear-gradient(145deg,var(--navy),var(--nm));border-radius:16px;padding:26px;border:1px solid rgba(37,168,102,.2);box-shadow:0 20px 48px rgba(0,0,0,.14);}
+.help-box h3{color:#fff;font-size:1.08rem;margin-bottom:18px;}
+.help-step{display:flex;gap:13px;margin-bottom:14px;align-items:flex-start;}
+.help-num{width:27px;height:27px;background:linear-gradient(135deg,var(--green),var(--gl));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem;flex-shrink:0;}
+.help-step p{color:#b0ccc4;font-size:.87rem;line-height:1.5;}
+.impact-stat{background:rgba(37,168,102,.1);border:1px solid rgba(37,168,102,.22);border-radius:10px;padding:15px;text-align:center;margin-top:14px;}
+.impact-stat .big{font-family:'Playfair Display',serif;font-size:2.1rem;color:var(--amber);}
+.impact-stat p{color:#8aaa98;font-size:.8rem;margin-top:4px;}
+
+/* PRIVACY */
+#privacy{background:linear-gradient(180deg,#f0f7f2,#eaf2ec);}
+.privacy-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:46px;}
+.priv-card{background:#fff;border-radius:14px;padding:22px;border:1px solid #daeade;transition:all .32s;position:relative;overflow:hidden;}
+.priv-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gl));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.priv-card:hover{transform:translateY(-6px);box-shadow:0 16px 38px rgba(0,0,0,.09);}.priv-card:hover::before{transform:scaleX(1);}
+.priv-icon{font-size:1.9rem;margin-bottom:11px;display:block;}
+.priv-card h4{color:var(--navy);font-size:.97rem;margin-bottom:7px;font-weight:600;}
+.priv-card p{color:var(--muted);font-size:.86rem;line-height:1.6;}
+.priv-tip{margin-top:11px;background:linear-gradient(135deg,#e8f7ee,#d4f0de);border-radius:6px;padding:9px 13px;font-size:.79rem;color:var(--gd);}
+.priv-tip::before{content:'💡 ';}
+
+/* CYBER LAWS */
+#cyberlaws{background:var(--navy);position:relative;overflow:hidden;}
+#cyberlaws::before{content:'';position:absolute;bottom:-180px;left:-120px;width:480px;height:480px;background:radial-gradient(circle,rgba(232,160,32,.1),transparent);border-radius:50%;}
+#cyberlaws .section-label{color:var(--amber);}
+#cyberlaws .section-label::before{background:var(--amber);}
+#cyberlaws .section-title{color:#fff;}
+#cyberlaws .section-title em{color:var(--amber);}
+#cyberlaws .section-title em::after{background:linear-gradient(90deg,var(--amber),var(--al));}
+#cyberlaws .section-desc{color:#8aaa98;}
+.law-header{background:linear-gradient(135deg,rgba(26,122,74,.18),rgba(23,50,74,.5));border:1px solid rgba(37,168,102,.28);border-radius:14px;padding:26px;margin-top:46px;display:flex;gap:20px;align-items:center;box-shadow:0 0 40px rgba(37,168,102,.07);}
+.law-badge{background:linear-gradient(135deg,var(--green),var(--gl));color:#fff;font-weight:700;border-radius:10px;padding:11px 20px;font-size:.88rem;white-space:nowrap;box-shadow:0 4px 16px rgba(26,122,74,.4);}
+.law-header h3{color:#fff;font-size:1.1rem;margin-bottom:5px;}
+.law-header p{color:#8aaa98;font-size:.88rem;line-height:1.5;}
+.peca-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:13px;margin-top:22px;}
+.peca-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:19px;transition:all .3s;position:relative;overflow:hidden;}
+.peca-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--gl));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.peca-card:hover{background:rgba(37,168,102,.12);border-color:var(--gl);transform:translateY(-4px);}.peca-card:hover::after{transform:scaleX(1);}
+.section-tag{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--al);font-weight:600;margin-bottom:5px;display:block;}
+.peca-card h4{color:#fff;font-size:.93rem;margin-bottom:7px;}
+.peca-card p{color:#8aaa98;font-size:.83rem;line-height:1.6;}
+.penalty{display:inline-block;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.38);color:#f0a8a0;font-size:.74rem;padding:3px 9px;border-radius:4px;margin-top:7px;}
+.fia-box{background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.28);border-radius:14px;padding:26px;margin-top:26px;}
+.fia-box h3{color:var(--amber);font-size:1.08rem;margin-bottom:14px;}
+.fia-contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:11px;}
+.fia-contact{background:rgba(255,255,255,.04);border-radius:8px;padding:13px 15px;transition:all .3s;border:1px solid rgba(255,255,255,.05);}
+.fia-contact:hover{background:rgba(255,255,255,.09);}
+.fia-contact .label{color:#8aaa98;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;}
+.fia-contact .value{color:#fff;font-size:.9rem;font-weight:600;margin-top:3px;}
+
+/* PARENTS */
+#parents{background:#fff;}
+.tabs{display:flex;gap:2px;margin-top:38px;border-bottom:2px solid var(--gray);}
+.tab-btn{background:none;border:none;cursor:pointer;padding:11px 20px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .22s;}
+.tab-btn.active,.tab-btn:hover{color:var(--green);}
+.tab-btn.active{border-bottom-color:var(--green);}
+.tab-content{display:none;padding:30px 0;}
+.tab-content.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:16px;}
+.tip-card{background:linear-gradient(135deg,#f4faf6,#fff);border-radius:12px;padding:20px;border:1px solid #daeade;transition:all .3s;}
+.tip-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(26,122,74,.1);border-color:var(--gl);}
+.tip-icon{font-size:1.7rem;margin-bottom:9px;}
+.tip-card h4{color:var(--navy);font-size:.93rem;margin-bottom:7px;font-weight:600;}
+.tip-card p{color:var(--muted);font-size:.85rem;line-height:1.6;}
+
+/* QUIZ */
+#quiz{background:linear-gradient(135deg,var(--gd),var(--navy));position:relative;overflow:hidden;}
+#quiz::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(37,168,102,.14),transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(232,160,32,.08),transparent 50%);}
+#quiz .section-label{color:var(--amber);}
+#quiz .section-label::before{background:var(--amber);}
+#quiz .section-title{color:#fff;}
+#quiz .section-title em{color:var(--amber);}
+#quiz .section-title em::after{background:linear-gradient(90deg,var(--amber),var(--al));}
+.quiz-box{max-width:700px;margin:38px auto 0;}
+.quiz-progress{background:rgba(255,255,255,.1);height:6px;border-radius:3px;margin-bottom:20px;}
+.quiz-progress-bar{height:100%;background:linear-gradient(90deg,var(--green),var(--gl));border-radius:3px;transition:width .5s ease;}
+.quiz-question{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:28px;backdrop-filter:blur(8px);}
+.q-num{font-size:.73rem;color:var(--amber);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;}
+.q-text{color:#fff;font-size:1.06rem;line-height:1.55;margin-bottom:18px;}
+.q-options{display:flex;flex-direction:column;gap:9px;}
+.q-option{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:13px 17px;cursor:pointer;color:#b8d0c4;font-size:.9rem;transition:all .22s;text-align:left;width:100%;font-family:'DM Sans',sans-serif;}
+.q-option:hover:not(:disabled){background:rgba(37,168,102,.2);border-color:var(--gl);color:#fff;transform:translateX(5px);}
+.q-option.correct{background:rgba(37,168,102,.32);border-color:var(--gl);color:#fff;}
+.q-option.wrong{background:rgba(192,57,43,.26);border-color:rgba(192,57,43,.55);color:#f0a8a0;}
+.quiz-feedback{margin-top:13px;padding:13px 17px;border-radius:10px;font-size:.89rem;display:none;}
+.quiz-feedback.show{display:block;animation:fadeUp .4s ease both;}
+.quiz-feedback.correct{background:rgba(37,168,102,.2);color:#a0e8b8;border:1px solid var(--green);}
+.quiz-feedback.wrong{background:rgba(192,57,43,.17);color:#f0b0a8;border:1px solid rgba(192,57,43,.45);}
+.quiz-nav{display:flex;margin-top:16px;justify-content:flex-end;}
+.quiz-btn{background:linear-gradient(135deg,var(--green),var(--gl));color:#fff;border:none;padding:11px 26px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;transition:all .22s;box-shadow:0 4px 14px rgba(26,122,74,.38);}
+.quiz-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(26,122,74,.56);}
+.quiz-score{text-align:center;padding:40px 20px;display:none;}
+.big-score{font-family:'Playfair Display',serif;font-size:4.5rem;background:linear-gradient(135deg,var(--amber),var(--al));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;animation:countUp .6s ease both;}
+.score-stars{font-size:2rem;margin:10px 0;}
+
+/* REPORT */
+#report{background:#fff;}
+.report-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:46px;position:relative;}
+.report-steps::before{content:'';position:absolute;top:36px;left:13%;right:13%;height:2px;background:linear-gradient(90deg,var(--green),var(--gl),var(--amber));opacity:.35;z-index:0;}
+.r-step{text-align:center;position:relative;z-index:1;padding:0 12px;}
+.r-step-circle{width:74px;height:74px;border-radius:50%;background:#fff;border:3px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:1.55rem;transition:all .3s;box-shadow:0 4px 15px rgba(26,122,74,.18);}
+.r-step:hover .r-step-circle{background:var(--green);transform:scale(1.12);}
+.r-step h4{font-size:.91rem;color:var(--navy);margin-bottom:5px;font-weight:600;}
+.r-step p{font-size:.81rem;color:var(--muted);line-height:1.5;}
+.emergency-box{background:linear-gradient(135deg,#fff5f4,#fff);border:2px solid rgba(192,57,43,.18);border-radius:14px;padding:26px;margin-top:38px;}
+.emergency-box h3{color:var(--red);font-size:1.08rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.emergency-contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:13px;}
+.emg-contact{background:#fff;border:1px solid rgba(192,57,43,.13);border-radius:10px;padding:14px;transition:all .3s;}
+.emg-contact:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 8px 20px rgba(192,57,43,.1);}
+.emg-contact .org{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.emg-contact .num{font-size:1.1rem;font-weight:700;color:var(--red);margin-top:3px;}
+.emg-contact .desc{font-size:.79rem;color:var(--muted);margin-top:3px;}
+
+/* FOOTER */
+footer{background:var(--navy);padding:58px 5% 28px;position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green),var(--gl),var(--amber),var(--gl),var(--green));background-size:200%;animation:gradMove 5s ease infinite;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;margin-bottom:38px;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.45rem;background:linear-gradient(90deg,var(--amber),var(--al));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;margin-bottom:13px;}
+.footer-brand p{color:#3e5848;font-size:.87rem;line-height:1.7;}
+.footer-col h4{color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:13px;}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:8px;}
+.footer-col a{color:#3e5848;font-size:.86rem;text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:5px;}
+.footer-col a::before{content:'›';color:var(--green);transition:transform .2s;}
+.footer-col a:hover{color:var(--gl);}.footer-col a:hover::before{transform:translateX(3px);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{color:#2a3c30;font-size:.79rem;}
+.footer-urdu{font-size:1rem;color:var(--al);}
+
+#scrollTop{position:fixed;bottom:26px;right:26px;background:linear-gradient(135deg,var(--green),var(--gl));color:#fff;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(26,122,74,.38);z-index:999;transition:all .22s;}
+#scrollTop:hover{transform:translateY(-4px) scale(1.1);}
+#scrollTop.show{display:flex;animation:fadeUp .3s ease both;}
+
+@media(max-width:880px){
+  .about-grid,.cyber-grid,.dos-donts,.ethics-list,.footer-grid{grid-template-columns:1fr;}
+  .report-steps::before{display:none;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(13,31,45,.98);padding:20px 5%;gap:13px;border-bottom:2px solid var(--green);}
+  .nav-links.open{display:flex;animation:fadeDown .3s ease both;}
+  .nav-toggle{display:block;}
+  .hero-stats{gap:24px;}
+  .tabs{overflow-x:auto;white-space:nowrap;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">DigiSmart Lahore</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#ethics">Ethics</a></li>
+    <li><a href="#fakenews">Fake News</a></li>
+    <li><a href="#cyberbullying">Bullying</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#cyberlaws">Cyber Laws</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#report">Report</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇵🇰 Lahore Community Awareness Initiative</div>
+    <h1 class="hero-title">Be Smart.<br>Stay <em>Safe Online.</em><br>Know Your Rights.</h1>
+    <p class="hero-sub">A complete guide to Digital Literacy, Social Media Ethics, and Cyber Laws for every citizen of Lahore — from students to seniors.</p>
+    <p class="hero-urdu">ڈیجیٹل دنیا میں محفوظ رہیں</p>
+    <div class="hero-btns">
+      <a href="#about" class="btn-primary">Start Learning →</a>
+      <a href="#cyberlaws" class="btn-secondary">Know Your Rights</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num" id="cnt1">54%</div><div class="stat-label">Pakistan Internet Access</div></div>
+      <div class="stat-item"><div class="stat-num">40M+</div><div class="stat-label">Youth Online Daily</div></div>
+      <div class="stat-item"><div class="stat-num">2016</div><div class="stat-label">PECA Cyber Law Enacted</div></div>
+      <div class="stat-item"><div class="stat-num" id="cnt2">14yr</div><div class="stat-label">Max Cyber Terror Sentence</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<div class="container">
+  <div class="anim up"><span class="section-label">Why It Matters</span><h2 class="section-title">Digital Literacy in <em>Lahore</em></h2><p class="section-desc">Lahore is one of Pakistan's most connected cities — but greater connectivity brings greater responsibility. Millions use social media daily without understanding the risks, rights, or ethics involved.</p></div>
+  <div class="about-grid">
+    <div class="about-visual anim left">
+      <div class="circles-row">
+        <div class="stat-circle green"><span class="sc-num">70%</span><span class="sc-label">Youth Use Social Media Daily</span></div>
+        <div class="stat-circle amber"><span class="sc-num">1 in 3</span><span class="sc-label">Teens Face Cyberbullying</span></div>
+      </div>
+      <div class="about-fact"><p>📌 Research from UMT Lahore shows adolescents in city schools report high rates of cyberbullying with limited coping resources.</p></div>
+      <div class="about-fact"><p>📌 Lahore users are highly susceptible to fake news and misinformation due to low media literacy skills.</p></div>
+      <div class="about-fact"><p>📌 Pakistan needs specialized digital literacy strategies to curb misinformation spread on WhatsApp and Facebook.</p></div>
+    </div>
+    <div class="about-text anim right">
+      <h3>What is Digital Literacy?</h3>
+      <p>Digital literacy means having the knowledge and skills to use digital technologies responsibly, safely, and ethically. It's not about knowing how to use an app — it's about understanding the <strong>impact, ethics, and consequences</strong> of your online actions.</p>
+      <p>In Lahore's growing digital landscape, young people, parents, teachers, and professionals all need to understand how to navigate the internet thoughtfully — especially on Facebook, Instagram, WhatsApp, TikTok, and YouTube.</p>
+      <p>This website covers: social media ethics, spotting fake news, avoiding cyberbullying, protecting your privacy, and knowing Pakistan's cyber laws.</p>
+      <div class="about-tags">
+        <span class="tag">Social Media Ethics</span><span class="tag">Fake News Detection</span><span class="tag">Online Privacy</span><span class="tag">Cyberbullying</span><span class="tag">PECA 2016</span><span class="tag">Cyber Safety</span>
+      </div>
+    </div>
+  </div>
+  <div class="cards-grid">
+    <div class="card anim up d1" style="--card-accent:var(--green)"><span class="card-icon">📱</span><h3>Social Media Awareness</h3><p>Learn how to use Facebook, Instagram, and TikTok responsibly — protecting yourself and others in the process.</p></div>
+    <div class="card anim up d2" style="--card-accent:var(--amber)"><span class="card-icon">🔍</span><h3>Critical Thinking Online</h3><p>Develop skills to evaluate information, spot misinformation, and avoid sharing content that could harm others.</p></div>
+    <div class="card anim up d3" style="--card-accent:#1a5fa8"><span class="card-icon">⚖️</span><h3>Know the Law</h3><p>Pakistan's PECA 2016 governs digital behavior. Understanding it protects you from unknowingly breaking — or falling victim to — cybercrime.</p></div>
+    <div class="card anim up d4" style="--card-accent:var(--red)"><span class="card-icon">🛡️</span><h3>Protect Your Privacy</h3><p>Your data is valuable. Learn how to secure accounts, recognize scams, and control what you share online.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ETHICS -->
+<section id="ethics">
+<div class="container">
+  <div class="anim up"><span class="section-label">Social Media</span><h2 class="section-title">Ethics in the <em>Digital Age</em></h2><p class="section-desc">Social media ethics means treating others online with the same respect you'd want in real life. Before you post, share, or comment — think about the impact.</p></div>
+  <div class="ethics-list">
+    <div class="ethics-item anim up d1"><div class="ethics-num">1</div><div><h4>Think Before You Share</h4><p>Once posted, content can never truly be deleted. Verify before sharing — ask: Is it true? Is it helpful? Is it necessary?</p></div></div>
+    <div class="ethics-item anim up d2"><div class="ethics-num">2</div><div><h4>Respect Others' Privacy</h4><p>Never share someone's photos, location, or personal info without consent. This applies to friends, family, and strangers alike.</p></div></div>
+    <div class="ethics-item anim up d3"><div class="ethics-num">3</div><div><h4>Be Kind — No Trolling</h4><p>Online harassment causes real psychological harm. Disagree respectfully. You can have opinions without attacking others.</p></div></div>
+    <div class="ethics-item anim up d4"><div class="ethics-num">4</div><div><h4>Credit Original Creators</h4><p>If you share a video, photo, or article — give proper credit. Intellectual property rights apply online too.</p></div></div>
+    <div class="ethics-item anim up d1"><div class="ethics-num">5</div><div><h4>Avoid Hate Speech</h4><p>Content promoting hatred based on religion, ethnicity, or gender is unethical AND illegal — up to 5 years in prison under PECA.</p></div></div>
+    <div class="ethics-item anim up d2"><div class="ethics-num">6</div><div><h4>Be Accountable</h4><p>Own your digital footprint. What you post reflects your character. Being anonymous doesn't make harmful actions acceptable or legal.</p></div></div>
+    <div class="ethics-item anim up d3"><div class="ethics-num">7</div><div><h4>Protect Children Online</h4><p>Never share images of minors without parental consent. Report any inappropriate content involving children immediately.</p></div></div>
+    <div class="ethics-item anim up d4"><div class="ethics-num">8</div><div><h4>Digital Wellbeing</h4><p>Social media is designed to be addictive. Set screen time limits, take breaks, and remember online comparisons can harm mental health.</p></div></div>
+  </div>
+  <div class="dos-donts">
+    <div class="do-col anim left">
+      <h3>✅ Best Practices</h3>
+      <ul class="do-list">
+        <li>Verify news from at least 2 credible sources before sharing</li>
+        <li>Use strong, unique passwords for every account</li>
+        <li>Report fake accounts, spam, and harmful content</li>
+        <li>Keep your profile privacy settings updated</li>
+        <li>Support others who are being harassed online</li>
+        <li>Fact-check viral messages before forwarding on WhatsApp</li>
+        <li>Think: "Would I say this to their face?"</li>
+        <li>Encourage positive, constructive online discussions</li>
+      </ul>
+    </div>
+    <div class="dont-col anim right">
+      <h3>❌ Things to Avoid</h3>
+      <ul class="dont-list">
+        <li>Sharing unverified news or "breaking" stories without sources</li>
+        <li>Posting personal information like phone numbers or addresses</li>
+        <li>Engaging with, encouraging, or ignoring cyberbullying</li>
+        <li>Clicking suspicious links — even from "friends"</li>
+        <li>Using someone else's photos or identity</li>
+        <li>Sending threatening, abusive, or harassing messages</li>
+        <li>Posting religious or sectarian hate speech</li>
+        <li>Sharing intimate images without explicit consent</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FAKE NEWS -->
+<section id="fakenews">
+<div class="container">
+  <div class="anim up"><span class="section-label">Misinformation</span><h2 class="section-title">Spotting <em>Fake News</em></h2><p class="section-desc">Pakistan is among the top countries affected by online misinformation, particularly on WhatsApp and Facebook. Learning to spot fake news is a critical skill for every digital citizen.</p></div>
+  <div class="steps-grid">
+    <div class="step-card anim up d1"><span class="step-num">S</span><h4>Source — Who Said It?</h4><p>Check the website or account. Is it a known, credible outlet? Fake news often comes from accounts mimicking real media organizations.</p></div>
+    <div class="step-card anim up d2"><span class="step-num">I</span><h4>Intent — Why Was It Shared?</h4><p>Ask: is this trying to make you angry or fearful? Emotional manipulation is a key tactic of misinformation campaigns.</p></div>
+    <div class="step-card anim up d3"><span class="step-num">F</span><h4>Facts — Can You Verify?</h4><p>Search the story on multiple credible news sources. If only one outlet reports it, be very cautious. Use Dawn or Geo for verification.</p></div>
+    <div class="step-card anim up d4"><span class="step-num">T</span><h4>Think — Before You Share</h4><p>Pause. Even sharing to "warn" people spreads false information. If you can't verify it, don't forward it — especially on WhatsApp groups.</p></div>
+  </div>
+  <div class="anim up" style="margin-top:32px">
+    <h3 style="color:#fff;font-size:1rem;margin-bottom:16px">⚠️ Red Flags — Signs of Fake News</h3>
+    <div class="red-flags">
+      <div class="red-flag"><span class="rf-icon">🔴</span><p><strong>Sensational headlines</strong> using ALL CAPS or extreme emotional language designed to provoke outrage.</p></div>
+      <div class="red-flag"><span class="rf-icon">🔴</span><p><strong>No author or date</strong> — legitimate news articles always identify their reporter and publication date clearly.</p></div>
+      <div class="red-flag"><span class="rf-icon">🔴</span><p><strong>Old images used as new</strong> — photos from years ago shared as if recent. Always do a reverse image search.</p></div>
+      <div class="red-flag"><span class="rf-icon">🔴</span><p><strong>Unofficial-looking website</strong> — Fake sites use names like "dawnn.pk" or "geo-news24.com" to look real.</p></div>
+      <div class="red-flag"><span class="rf-icon">🔴</span><p><strong>"Forward to 10 people!"</strong> — Chain messages on WhatsApp are almost always false. Urgency is manipulation.</p></div>
+      <div class="red-flag"><span class="rf-icon">🔴</span><p><strong>Quotes without context</strong> — Taking a public figure's words out of context to misrepresent their position.</p></div>
+    </div>
+  </div>
+  <div class="anim up" style="margin-top:32px">
+    <h3 style="color:#fff;font-size:1rem;margin-bottom:16px">🇵🇰 Trusted Pakistan Fact-Checking Resources</h3>
+    <div class="fact-checkers">
+      <div class="fc-card"><div class="fc-name">Soch Fact Check</div><div class="fc-desc">Pakistan's leading fact-checking organization — sochfactcheck.com</div></div>
+      <div class="fc-card"><div class="fc-name">Dawn.com</div><div class="fc-desc">Established newspaper with verified reporting and corrections policy</div></div>
+      <div class="fc-card"><div class="fc-name">AFP Fact Check</div><div class="fc-desc">International fact-checking covering Pakistan — factcheck.afp.com</div></div>
+      <div class="fc-card"><div class="fc-name">Google Reverse Image</div><div class="fc-desc">Right-click any image → "Search image with Google" to verify origin</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CYBERBULLYING -->
+<section id="cyberbullying">
+<div class="container">
+  <div class="anim up"><span class="section-label">Online Safety</span><h2 class="section-title">Understanding <em>Cyberbullying</em></h2><p class="section-desc">Cyberbullying is a serious issue among Lahore's youth. Research across Lahore schools found significant rates of online harassment among students in grades 9 and 10.</p></div>
+  <div class="cyber-grid">
+    <div class="anim left">
+      <h3 style="font-size:1rem;color:var(--navy);margin-bottom:16px;font-weight:600">Types of Cyberbullying</h3>
+      <div class="cyber-types">
+        <div class="cyber-type"><h4>Harassment</h4><p>Repeatedly sending hurtful, threatening, or offensive messages through texts, DMs, comments, or group chats.</p></div>
+        <div class="cyber-type"><h4>Cyberstalking</h4><p>Using technology to follow, track, or monitor someone's online activity in a way that causes fear or distress.</p></div>
+        <div class="cyber-type"><h4>Impersonation</h4><p>Creating fake accounts pretending to be someone else to damage their reputation or deceive others.</p></div>
+        <div class="cyber-type"><h4>Doxing</h4><p>Publicly revealing someone's private information (home address, phone, school) without consent — putting them in danger.</p></div>
+        <div class="cyber-type"><h4>Public Shaming</h4><p>Deliberately humiliating someone through posts, screenshots, or making content go viral to embarrass them.</p></div>
+      </div>
+      <div class="impact-stat"><div class="big">1 in 3</div><p>Teenagers in Lahore schools have experienced cyberbullying (UMT Lahore Research, 2024)</p></div>
+    </div>
+    <div class="anim right">
+      <div class="help-box">
+        <h3>💪 What to Do If You're Bullied Online</h3>
+        <div class="help-step"><div class="help-num">1</div><p><strong>Don't Respond</strong> — Responding often escalates the situation. Take a screenshot first, then step away.</p></div>
+        <div class="help-step"><div class="help-num">2</div><p><strong>Block &amp; Report</strong> — Use the platform's tools to block the bully and report the content. All major apps have this.</p></div>
+        <div class="help-step"><div class="help-num">3</div><p><strong>Save Evidence</strong> — Screenshots, message logs, and URLs are important if you need to report to authorities later.</p></div>
+        <div class="help-step"><div class="help-num">4</div><p><strong>Tell a Trusted Adult</strong> — Share what's happening with a parent, teacher, or counselor. You don't have to face this alone.</p></div>
+        <div class="help-step"><div class="help-num">5</div><p><strong>Contact FIA</strong> — Cyberbullying is illegal under PECA 2016. File a complaint with FIA's Cyber Crime Wing.</p></div>
+        <div class="help-step"><div class="help-num">6</div><p><strong>Take a Break</strong> — It's okay to log off and look after your mental health. Your wellbeing matters more than being online.</p></div>
+      </div>
+      <div style="background:#e8f7ee;border-radius:10px;padding:16px;margin-top:14px;border:1px solid #a8d9b8">
+        <h4 style="color:var(--gd);margin-bottom:7px">👀 If You Witness Cyberbullying:</h4>
+        <p style="font-size:.86rem;color:var(--muted);line-height:1.6">Don't be a silent bystander. Support the victim privately, avoid liking or sharing harmful content, report to the platform, and encourage others to do the same. Being a positive bystander makes a real difference.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+<div class="container">
+  <div class="anim up"><span class="section-label">Online Privacy</span><h2 class="section-title">Protecting Your <em>Digital Self</em></h2><p class="section-desc">Your personal data is valuable. Companies, hackers, and scammers are constantly looking for ways to access it. Here's how to stay protected.</p></div>
+  <div class="privacy-cards">
+    <div class="priv-card anim up d1"><div class="priv-icon">🔐</div><h4>Strong Passwords</h4><p>Use long passwords (12+ characters) mixing letters, numbers, and symbols. Never use your birthday or "123456." Use a different password for every account.</p><div class="priv-tip">Use a password manager like Bitwarden (free) to manage multiple passwords safely.</div></div>
+    <div class="priv-card anim up d2"><div class="priv-icon">🔒</div><h4>Two-Factor Authentication</h4><p>Enable 2FA on all accounts — WhatsApp, Gmail, Instagram, etc. It adds a second layer of security even if your password is stolen.</p><div class="priv-tip">Settings → Security → Two-Factor Authentication on most apps.</div></div>
+    <div class="priv-card anim up d3"><div class="priv-icon">👁️</div><h4>Privacy Settings</h4><p>Review privacy settings on every social media account. Limit who can see your posts, location, and contact info. Audit every 3 months.</p><div class="priv-tip">Check both Instagram and Facebook privacy settings regularly.</div></div>
+    <div class="priv-card anim up d4"><div class="priv-icon">🎣</div><h4>Recognize Phishing</h4><p>Phishing scams pretend to be banks or government agencies to steal your login details. Watch for suspicious links and urgent requests for personal info.</p><div class="priv-tip">Real organizations never ask for your password via email or WhatsApp.</div></div>
+    <div class="priv-card anim up d5"><div class="priv-icon">📍</div><h4>Location Safety</h4><p>"Checking in" at home, posting live location, or sharing photos with location metadata can compromise your physical safety.</p><div class="priv-tip">Turn off location tagging in your phone camera settings.</div></div>
+    <div class="priv-card anim up d6"><div class="priv-icon">🛜</div><h4>Public Wi-Fi Risks</h4><p>Avoid logging into bank accounts on public Wi-Fi (cafés, malls). These networks can be intercepted by hackers in the same location.</p><div class="priv-tip">Use mobile data for banking, or a VPN if you must use public Wi-Fi.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CYBER LAWS -->
+<section id="cyberlaws">
+<div class="container">
+  <div class="anim up"><span class="section-label">Know Your Rights &amp; Limits</span><h2 class="section-title">Pakistan's <em>Cyber Laws</em></h2><p class="section-desc">Pakistan's Prevention of Electronic Crimes Act (PECA) 2016 is the primary legislation governing online behavior. Ignorance of the law is not a defense — every internet user must understand it.</p></div>
+  <div class="law-header anim up">
+    <div class="law-badge">PECA 2016</div>
+    <div><h3>Prevention of Electronic Crimes Act, 2016</h3><p>Enacted on August 1, 2016, PECA is Pakistan's cornerstone digital law with 53 sections. It covers everything from hacking and fraud to harassment and hate speech. The FIA Cyber Crime Wing is responsible for enforcement.</p></div>
+  </div>
+  <div class="peca-grid">
+    <div class="peca-card anim up d1"><span class="section-tag">Section 3 &amp; 4</span><h4>Unauthorized Access &amp; Data Theft</h4><p>Accessing someone's computer, phone, or account without permission — including hacking or guessing passwords — is illegal, even "just to look."</p><span class="penalty">⚖️ Up to 3 years &amp; PKR 5 million fine</span></div>
+    <div class="peca-card anim up d2"><span class="section-tag">Section 10</span><h4>Hate Speech &amp; Sectarian Content</h4><p>Posting, sharing, or creating content that promotes hatred based on religion, ethnicity, or gender is a serious criminal offense.</p><span class="penalty">⚖️ Up to 5 years &amp; PKR 10 million fine</span></div>
+    <div class="peca-card anim up d3"><span class="section-tag">Section 14 &amp; 15</span><h4>Electronic Fraud &amp; Forgery</h4><p>Online scams, phishing, fake e-commerce stores, and fraudulent digital transactions are covered under these sections.</p><span class="penalty">⚖️ Up to 7 years imprisonment</span></div>
+    <div class="peca-card anim up d4"><span class="section-tag">Section 20</span><h4>Cyber Defamation</h4><p>Posting or sharing false, harmful content about someone — including memes, fake screenshots, or fabricated statements — online is criminal.</p><span class="penalty">⚖️ Up to 3 years &amp; PKR 1 million fine</span></div>
+    <div class="peca-card anim up d1"><span class="section-tag">Section 21 &amp; 22</span><h4>Cyber Harassment</h4><p>Sending obscene messages, publishing someone's images without consent, or threatening to release private content is illegal.</p><span class="penalty">⚖️ Up to 5 years &amp; PKR 1 million fine</span></div>
+    <div class="peca-card anim up d2"><span class="section-tag">Section 23</span><h4>Cyberstalking</h4><p>Monitoring, contacting, or following someone online without their consent in a way that causes fear or distress — including via fake accounts.</p><span class="penalty">⚖️ Up to 3 years &amp; PKR 1 million fine</span></div>
+    <div class="peca-card anim up d3"><span class="section-tag">Section 24</span><h4>Child Safety Online</h4><p>Any content that exploits, endangers, or sexualizes children online carries Pakistan's strictest digital penalties. Report any such content immediately.</p><span class="penalty">⚖️ Severe imprisonment &amp; heavy fines</span></div>
+    <div class="peca-card anim up d4"><span class="section-tag">Section 11</span><h4>Cyber Terrorism</h4><p>Using digital means to threaten national security, incite violence, or attack critical infrastructure — the gravest digital offense.</p><span class="penalty">⚖️ Up to 14 years &amp; PKR 10 million fine</span></div>
+    <div class="peca-card anim up d1"><span class="section-tag">Section 9</span><h4>Spam &amp; Unauthorized Marketing</h4><p>Sending bulk messages, unsolicited marketing, or spam without consent — including via WhatsApp groups — is punishable under PECA.</p><span class="penalty">⚖️ PKR 50,000 fine (increases for repeat)</span></div>
+  </div>
+  <div class="fia-box anim up">
+    <h3>🏛️ How to Contact the FIA Cyber Crime Wing</h3>
+    <div class="fia-contacts">
+      <div class="fia-contact"><div class="label">FIA Helpline</div><div class="value">📞 0800-02345</div></div>
+      <div class="fia-contact"><div class="label">Online Portal</div><div class="value">🌐 fia.gov.pk/ccwing</div></div>
+      <div class="fia-contact"><div class="label">Email</div><div class="value">✉️ ccwing@fia.gov.pk</div></div>
+      <div class="fia-contact"><div class="label">Lahore Office</div><div class="value">📍 Punjab Zone, Lahore</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PARENTS -->
+<section id="parents">
+<div class="container">
+  <div class="anim up"><span class="section-label">Community Resources</span><h2 class="section-title">For <em>Parents, Teachers</em> &amp; Students</h2><p class="section-desc">Digital literacy is a community effort. Here are tailored tips for different groups in Lahore's community.</p></div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('parents-tab',this)">👨‍👩‍👧 Parents</button>
+    <button class="tab-btn" onclick="showTab('teachers-tab',this)">👩‍🏫 Teachers</button>
+    <button class="tab-btn" onclick="showTab('students-tab',this)">🎓 Students</button>
+    <button class="tab-btn" onclick="showTab('seniors-tab',this)">👴 Seniors</button>
+  </div>
+  <div id="parents-tab" class="tab-content active">
+    <div class="tip-card"><div class="tip-icon">💬</div><h4>Start Conversations</h4><p>Talk openly with your children about what they do online. Ask about their friends, the apps they use, and if anything makes them uncomfortable — without judgment.</p></div>
+    <div class="tip-card"><div class="tip-icon">⏰</div><h4>Set Screen Time Limits</h4><p>Agree on daily screen time limits. Many phones have built-in parental controls. Encourage offline activities like sports, reading, and family time.</p></div>
+    <div class="tip-card"><div class="tip-icon">🔐</div><h4>Know Their Accounts</h4><p>For younger children, knowing their passwords is reasonable. As trust grows, gradually give more independence while maintaining open communication.</p></div>
+    <div class="tip-card"><div class="tip-icon">📱</div><h4>Common Area Rule</h4><p>Encourage phone use in the living room, not bedrooms — especially at night. This reduces exposure to harmful content and late-night usage.</p></div>
+  </div>
+  <div id="teachers-tab" class="tab-content">
+    <div class="tip-card"><div class="tip-icon">📚</div><h4>Integrate Digital Literacy</h4><p>Include lessons on spotting fake news, privacy, and consequences of cyberbullying across all subjects — not just IT class.</p></div>
+    <div class="tip-card"><div class="tip-icon">🗣️</div><h4>Safe Reporting Channels</h4><p>Students need to trust they can report online issues without embarrassment. Establish anonymous reporting options for cyberbullying in your school.</p></div>
+    <div class="tip-card"><div class="tip-icon">⚖️</div><h4>Teach PECA Basics</h4><p>Students should understand that PECA 2016 applies to them too. A meme shared in a WhatsApp class group could carry serious legal consequences.</p></div>
+    <div class="tip-card"><div class="tip-icon">🤝</div><h4>Engage Parents</h4><p>Host workshops for parents on digital safety. Many parents are unaware of the risks their children face. School-home partnership is essential.</p></div>
+  </div>
+  <div id="students-tab" class="tab-content">
+    <div class="tip-card"><div class="tip-icon">🧠</div><h4>Think Before You Post</h4><p>Your digital footprint lasts forever. Future employers and universities can see what you post today. Pause before hitting "share."</p></div>
+    <div class="tip-card"><div class="tip-icon">🤫</div><h4>Keep Personal Info Private</h4><p>Never share your school name, home address, phone number, or daily schedule with strangers online — no matter how "nice" they seem.</p></div>
+    <div class="tip-card"><div class="tip-icon">📣</div><h4>Speak Up</h4><p>If you or a friend is being bullied online, tell a trusted adult. Staying silent allows bullies to continue. You are not alone, and it is not your fault.</p></div>
+    <div class="tip-card"><div class="tip-icon">🌟</div><h4>Be a Digital Role Model</h4><p>Use your platform for positive content. Encourage others, share helpful information, and call out misinformation respectfully.</p></div>
+  </div>
+  <div id="seniors-tab" class="tab-content">
+    <div class="tip-card"><div class="tip-icon">🎣</div><h4>Beware Scams Targeting Seniors</h4><p>WhatsApp scams often target older adults with fake prizes or "relative in trouble" messages. Always verify by calling directly before taking action.</p></div>
+    <div class="tip-card"><div class="tip-icon">🔗</div><h4>Don't Forward Unverified Links</h4><p>Messages telling you to "forward to all contacts" are almost always fake. Forwarding them spreads misinformation to your loved ones.</p></div>
+    <div class="tip-card"><div class="tip-icon">🆘</div><h4>Ask for Help</h4><p>It's completely okay not to know everything about technology. Ask a trusted family member to help you review suspicious messages or check privacy settings.</p></div>
+    <div class="tip-card"><div class="tip-icon">📵</div><h4>Protect Financial Info</h4><p>Never share your bank account number, CNIC, or PIN online. Banks and government agencies never ask for this via messages or calls.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+<div class="container">
+  <div class="anim up"><span class="section-label">Test Yourself</span><h2 class="section-title">Digital Literacy <em>Quiz</em></h2><p class="section-desc" style="color:#8aaa98">How digitally literate are you? Test your knowledge — suitable for all ages!</p></div>
+  <div class="quiz-box">
+    <div class="quiz-progress"><div class="quiz-progress-bar" id="progressBar" style="width:0%"></div></div>
+    <div class="quiz-question" id="quizCard">
+      <div class="q-num" id="qNum">Question 1 of 8</div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-options" id="qOptions"></div>
+      <div class="quiz-feedback" id="qFeedback"></div>
+      <div class="quiz-nav"><button class="quiz-btn" id="nextBtn" onclick="nextQuestion()" style="display:none">Next →</button></div>
+    </div>
+    <div class="quiz-score" id="quizScore">
+      <p style="color:#8aaa98;font-size:.72rem;letter-spacing:2px;text-transform:uppercase">Your Score</p>
+      <span class="big-score" id="finalScore">0/8</span>
+      <div class="score-stars" id="scoreStars">⭐⭐⭐</div>
+      <p id="scoreMsg" style="color:#8aaa98;margin-top:8px"></p>
+      <button class="quiz-btn" onclick="restartQuiz()" style="margin-top:22px">Try Again 🔄</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- REPORT -->
+<section id="report">
+<div class="container">
+  <div class="anim up"><span class="section-label">Take Action</span><h2 class="section-title">How to <em>Report</em> Cybercrime</h2><p class="section-desc">If you or someone you know is a victim of cybercrime, here's how to report it in Pakistan. Act quickly — preserve evidence as soon as possible.</p></div>
+  <div class="report-steps">
+    <div class="r-step anim up d1"><div class="r-step-circle">📸</div><h4>Step 1: Save Evidence</h4><p>Take screenshots of all harmful messages, posts, or URLs. Note dates and times. Do not delete anything.</p></div>
+    <div class="r-step anim up d2"><div class="r-step-circle">🚫</div><h4>Step 2: Block &amp; Report</h4><p>Use the platform's reporting tools — Facebook, Instagram, WhatsApp all have these. This can get content removed quickly.</p></div>
+    <div class="r-step anim up d3"><div class="r-step-circle">👥</div><h4>Step 3: Tell Someone</h4><p>Inform a trusted adult, teacher, or family member. For serious cases, you don't have to handle this alone.</p></div>
+    <div class="r-step anim up d4"><div class="r-step-circle">🏛️</div><h4>Step 4: File a Complaint</h4><p>Submit a formal complaint to the FIA Cyber Crime Wing at fia.gov.pk or call the helpline 0800-02345.</p></div>
+  </div>
+  <div class="emergency-box anim up">
+    <h3>🆘 Emergency Contact Numbers</h3>
+    <div class="emergency-contacts">
+      <div class="emg-contact"><div class="org">FIA Cyber Crime Helpline</div><div class="num">0800-02345</div><div class="desc">Free helpline — Mon–Sat</div></div>
+      <div class="emg-contact"><div class="org">FIA Online Portal</div><div class="num">fia.gov.pk</div><div class="desc">Digital complaints 24/7</div></div>
+      <div class="emg-contact"><div class="org">PTA Complaint Center</div><div class="num">0800-55055</div><div class="desc">Internet &amp; telecom complaints</div></div>
+      <div class="emg-contact"><div class="org">Rozan Counselling</div><div class="num">051-2890505</div><div class="desc">Mental health support for youth</div></div>
+      <div class="emg-contact"><div class="org">Umang Helpline</div><div class="num">0317-4288665</div><div class="desc">Psychological support helpline</div></div>
+      <div class="emg-contact"><div class="org">Emergency / Police</div><div class="num">15 / 1122</div><div class="desc">If in immediate danger</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">DigiSmart Lahore</div>
+      <p>An awareness initiative for the citizens of Lahore, Pakistan — promoting safe, ethical, and responsible digital behavior for all ages.</p>
+      <p style="margin-top:10px;color:#243028;font-size:.79rem">This website is a Civics &amp; Community Engagement school project dedicated to digital literacy education.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Sections</h4>
+      <ul><li><a href="#about">Digital Literacy</a></li><li><a href="#ethics">Social Media Ethics</a></li><li><a href="#fakenews">Spot Fake News</a></li><li><a href="#cyberbullying">Cyberbullying</a></li><li><a href="#privacy">Online Privacy</a></li><li><a href="#cyberlaws">Cyber Laws</a></li><li><a href="#quiz">Take the Quiz</a></li><li><a href="#report">Report Cybercrime</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Key Laws</h4>
+      <ul><li><a href="#cyberlaws">PECA 2016</a></li><li><a href="#cyberlaws">Cyber Harassment</a></li><li><a href="#cyberlaws">Hate Speech</a></li><li><a href="#cyberlaws">Online Defamation</a></li><li><a href="#cyberlaws">Electronic Fraud</a></li></ul>
+      <h4 style="margin-top:18px">Report</h4>
+      <ul><li><a href="#report">FIA Cyber Crime</a></li><li><a href="#report">PTA Complaints</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 DigiSmart Lahore — Made with 🇵🇰 for Lahore</p>
+    <div class="footer-urdu">محفوظ رہیں، باخبر رہیں</div>
+  </div>
+</div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ── REVEAL: add js-ready AFTER page loads so elements are visible first ── */
+window.addEventListener('load', function() {
+  document.body.classList.add('js-ready');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+  // Safety: reveal everything after 2s regardless
+  setTimeout(() => document.querySelectorAll('.anim').forEach(el => el.classList.add('show')), 2000);
+});
+
+/* ── SCROLL TOP ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400);
+});
+
+/* ── TABS ── */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── QUIZ ── */
+const questions = [
+  {q:"You receive a WhatsApp message claiming a celebrity died, with a link to an 'exclusive video.' What should you do?",options:["Forward it to all your contacts immediately","Click the link to verify","Search on a verified news website like Dawn or Geo before sharing","Post it on Instagram as breaking news"],correct:2,feedback:"✅ Always verify breaking news on established platforms. WhatsApp forwards are a major source of misinformation in Pakistan."},
+  {q:"Under Pakistan's PECA 2016, posting hate speech against a religious group online can lead to:",options:["Just a warning from police","Up to 5 years in prison and a PKR 10 million fine","Only account suspension","No punishment — it's just an opinion"],correct:1,feedback:"✅ Under Section 10 of PECA 2016, promoting sectarian or religious hatred carries up to 5 years imprisonment and a PKR 10 million fine."},
+  {q:"A classmate is being harassed via anonymous Instagram messages. What is the FIRST thing to advise them?",options:["Respond angrily to the harasser","Screenshot evidence, then block and report","Delete their Instagram account","Just ignore it — online things don't matter"],correct:1,feedback:"✅ Always save evidence first (screenshots), then block and report to the platform. Evidence is crucial if the case escalates to the FIA."},
+  {q:"Which organization in Pakistan is responsible for investigating cybercrime cases under PECA 2016?",options:["PTA (Pakistan Telecommunication Authority)","FIA Cyber Crime Wing","Pakistan Police Cyber Unit","PEMRA"],correct:1,feedback:"✅ The Federal Investigation Agency (FIA) Cyber Crime Wing is Pakistan's primary body for cybercrime. Contact them at 0800-02345."},
+  {q:"What does Two-Factor Authentication (2FA) protect you from?",options:["Viruses on your phone","Unauthorized access even if someone knows your password","Spam messages","Slow internet speed"],correct:1,feedback:"✅ 2FA adds an extra layer — usually a code sent to your phone — so even if a hacker has your password, they still can't log in."},
+  {q:"An article has a sensational headline in ALL CAPS, no author name, and the URL looks slightly wrong (like 'Dawwn.com'). This is most likely:",options:["A credible news source","A government announcement","Fake news or a phishing website","An international news report"],correct:2,feedback:"✅ These are classic red flags: misspelled URLs, no author, and emotionally exaggerated headlines — warning signs to never share."},
+  {q:"Sharing someone's private photos without their consent online in Pakistan is:",options:["Legal if the relationship ended","Illegal — punishable under PECA with up to 5 years in prison","Only illegal if the person complains","Legal if you didn't take the photo yourself"],correct:1,feedback:"✅ Sharing intimate images without consent is illegal under PECA Section 21 & 22, carrying up to 5 years imprisonment and fines."},
+  {q:"Which of these is the safest password for your social media account?",options:["lahore123","YourBirthday2005","M@ng0#Lahore!2025","password"],correct:2,feedback:"✅ Strong passwords use a mix of uppercase, lowercase, numbers, and symbols — at least 12 characters. Never use your name or birthday."}
+];
+let currentQ=0,score=0,answered=false;
+function loadQuestion(){
+  const q=questions[currentQ];
+  document.getElementById('qNum').textContent=`Question ${currentQ+1} of ${questions.length}`;
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('progressBar').style.width=`${(currentQ/questions.length)*100}%`;
+  const opts=document.getElementById('qOptions');opts.innerHTML='';
+  q.options.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='q-option';btn.textContent=opt;btn.onclick=()=>selectAnswer(i,btn);opts.appendChild(btn);});
+  document.getElementById('qFeedback').className='quiz-feedback';
+  document.getElementById('qFeedback').textContent='';
+  document.getElementById('nextBtn').style.display='none';
+  answered=false;
+}
+function selectAnswer(idx,btn){
+  if(answered)return;answered=true;
+  const q=questions[currentQ];
+  document.querySelectorAll('.q-option').forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct');else if(i===idx)b.classList.add('wrong');});
+  const fb=document.getElementById('qFeedback');
+  if(idx===q.correct){score++;fb.textContent=q.feedback;fb.className='quiz-feedback show correct';}
+  else{fb.textContent='❌ Not quite. '+q.feedback;fb.className='quiz-feedback show wrong';}
+  const nb=document.getElementById('nextBtn');nb.style.display='block';
+  nb.textContent=currentQ===questions.length-1?'See My Score 🏆':'Next →';
+}
+function nextQuestion(){currentQ++;if(currentQ>=questions.length)showScore();else loadQuestion();}
+function showScore(){
+  document.getElementById('quizCard').style.display='none';
+  document.getElementById('quizScore').style.display='block';
+  document.getElementById('progressBar').style.width='100%';
+  document.getElementById('finalScore').textContent=`${score}/${questions.length}`;
+  const stars=score<=2?'⭐':score<=4?'⭐⭐':score<=6?'⭐⭐⭐':'⭐⭐⭐⭐⭐';
+  const msgs=['Keep learning! Go through the sections above and try again.','Good start! You know the basics — review sections for more.','Well done! You have solid digital literacy knowledge.','Excellent! You\'re a digital literacy champion! 🌟'];
+  document.getElementById('scoreStars').textContent=stars;
+  document.getElementById('scoreMsg').textContent=msgs[score<=2?0:score<=4?1:score<=6?2:3];
+}
+function restartQuiz(){currentQ=0;score=0;answered=false;document.getElementById('quizCard').style.display='block';document.getElementById('quizScore').style.display='none';document.getElementById('progressBar').style.width='0%';loadQuestion();}
+loadQuestion();
+</script>
+</body>
+</html>
