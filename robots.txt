@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abd-allah83.github.io/digital-literacy/sitemap.xml
